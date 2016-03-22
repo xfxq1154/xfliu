@@ -1,0 +1,37 @@
+.index_avatar{
+	background-size: cover;max-width: 100px;
+    margin-top: -50px;
+    margin-bottom: 5px;
+    border: 3px solid #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.index_my_style{
+	border:1px solid #d3e0e9;
+	border-radius: 4px;
+	text-align:center;
+}
+.index_my_style > div:first-child{
+	height:150px;background-image:url(../image/avatar_b.jpg);background-size: cover;
+}
+.tlag_line{
+	margin-top:30px;
+}
+.content-border{
+	border:1px solid #d3e0e9;
+	border-radius: 4px;
+	padding:10px;
+}
+.content-text{
+	ext-overflow: -o-ellipsis-lastline;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 8;
+	-webkit-box-orient: vertical;
+}
+.content-title{
+	font-weight:600;
+}
+.call-mack-message-button{
+	display:none;
+}
