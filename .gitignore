@@ -1,0 +1,13 @@
+coms/                #Ä£°å»º´æ
+cache/		     #Êý¾Ý¿â×Ö¶Î»º´æ
+updata/		   
+coms/*.php
+cache/*.php
+updata/*
+sortlog/*.php
+Org/
+
+
+config.inc.php
+.htaccess
+
