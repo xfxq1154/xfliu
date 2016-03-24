@@ -6,7 +6,7 @@
 	session_start(); 
     //其实要我说啊 入口文件也要改改
 	header("Content-Type:text/html;charset=utf-8");  //设置系统的输出字符为utf-8
-	date_default_timezone_set("Etc/GMT"); //格林威治时间
+	date_default_timezone_set("PRC"); //格林威治时间
 
 
 

@@ -8,15 +8,28 @@
 					<img class="media-object" src="public/image/myface.jpg" style="height:40px;">
 				</div>
 				<div class="media-body">
-					<a href="index.php?c=article&m=articleList">
+					<a href="article-articleList-<{$v.id}>.html">
 						<h4 class="media-heading"><{$v.title}></h4>
 					</a>
 					<p class="content-text">
-						<{$v.content}>
+						<{$v.content|strip_tags}>
 					</p>
 				</div>
-				<div class="media-other" style="font-size:12px;height:20px;text-align:right">
-					浏览次数(1111)&nbsp;&nbsp;评论(1111)&nbsp;&nbsp;PYTHON
+				<div class="media-other">
+					<span>
+						<a href="article-articleList-<{$v.id}>.html">
+							阅读全文
+						</a>
+					</span>
+					<span>
+						浏览次数(1111)	
+					</span>
+					<span>
+						评论(1111)
+					</span>
+					<span>
+						PYTHON	
+					</span>
 				</div>
 			</div>
 			<{/foreach}>

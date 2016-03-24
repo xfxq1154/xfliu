@@ -7,6 +7,11 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
     <link rel="stylesheet" href="public/css/style.css">
+   	<script type="text/javascript" src="public/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>   
+<link rel="stylesheet" href="public/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+	<script>   
+		SyntaxHighlighter.all() //执行代码高亮   
+	</script>
 </head>
 <style type="text/css">
 	body{

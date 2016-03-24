@@ -24,11 +24,13 @@
 <!-- 实例化编辑器 -->
     <script type="text/javascript">
         var ue = UE.getEditor('container');
+        
         ue.ready(function(){
           $("#submit-button").click(function() {
             var html = ue.getContent();
+            
             $.ajax({
-              url: "index.php?c=article&m=ueditorContent",
+              url: "article-ueditorContent-<{$artContent.id}>.html",
               type: "POST",
               data: {content:html},
               dataType: "json",

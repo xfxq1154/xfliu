@@ -8,6 +8,7 @@ class indexAction extends Action{
 
 	public function index() {
 		$articleList = $this->getBlogArticleList();
+
 		$this->assign("list", $articleList);
 		$this->display('index.tpl');
 	}
@@ -17,7 +18,7 @@ class indexAction extends Action{
 	//获取技术文章列表
 	protected function getBlogArticleList() {
 		$article = new mysqlModel('article');
-		$field = array("title", "content");
+		$field = array("id", "title", "content");
 		$where = " status = 1";
 		$order = " sort DESC, id DESC";
 		//$limit = "";

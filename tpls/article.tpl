@@ -2,30 +2,36 @@
 	<div class="col-md-9">
 		<div class="media content-border">
 			<div class="media-body">
-				<h1 class="media-heading">Top aligned media</h1>
-				<p>浏览:</p>
-				<p>
-					Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-				</p>
+				<h1 class="media-heading"><{$artContent.title}></h1>
+				<div class="row">
+					<div class="col-md-6">
+						<p>浏览次数:<span></span></p>
+					</div>
+					<div class="col-md-6" style="text-align:right">
+						<p>发布时间:<{$artContent.time|date_format:'%Y-%m-%d %H:%M:%S'}></p>
+					</div>
+				</div>
+				<{$artContent.content}>
 				<hr />
 				<p>发表评论:</p>
 				<ul class="media-list m-b">
-					<li class="media">
-						<a class="media-left" href="#">
-							<img class="media-object img-circle" src="public/image/myface.jpg" style="height:40px;"></a>
-						<div class="media-body"> <strong>Jacon Thornton:</strong>
-							Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.
-						</div>
-						<hr />
-					</li>
-					<li class="media">
-						<a class="media-left" href="#">
-							<img class="media-object img-circle" src="public/image/myface.jpg" style="height:40px;"></a>
-						<div class="media-body"> <strong>Jacon Thornton:</strong>
-							Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.
-						</div>
-						<hr />
-					</li>
+					<{if is_array($artCallBack)}>
+						<{foreach from=$artCallBack item=v key=k}>
+						<li class="media">
+							<a class="media-left" href="#">
+								<img class="media-object img-circle" src="http://7xs3gv.com1.z0.glb.clouddn.com/default_face.jpg" style="height:40px;"></a>
+							<div class="media-body"> <strong><{$v.user_ip}></strong>
+								<{$v.content}>
+							</div>
+							<hr />
+						</li>
+						<{/foreach}>
+					<{else}>
+						<li class="media reply-empty">
+							<p>还没有人发表评论</p>
+							<hr />
+						</li>
+					<{/if}>
 
 					<div class="media">
 						<div class="call-mack-message-button">
