@@ -33,7 +33,7 @@
 				</div>
 			</div>
 			<{/foreach}>
-		</div>
+		</div>	
 		<!--点击量之类的-->
 		<div class="col-md-3">
 			<div class="card">
@@ -49,11 +49,13 @@
 				<div class="card-header">热评</div>
 				<div class="card-block">
 					<blockquote class="card-blockquote">
-						<p>标题列表</p>
-						<p>标题列表</p>
-						<p>标题列表</p>
-						<p>标题列表</p>
-						<p>标题列表</p>
+						<{foreach from=$hot item=v key=k}>
+						<a href="article-articleList-<{$v.id}>.html">
+							<p>
+								<{$v.title}>
+							</p>
+						</a>
+						<{/foreach}>
 					</blockquote>
 				</div>
 			</div>
@@ -61,11 +63,13 @@
 				<div class="card-header">最新回复</div>
 				<div class="card-block">
 					<blockquote class="card-blockquote">
-						<p>回复列表</p>
-						<p>回复列表</p>
-						<p>回复列表</p>
-						<p>回复列表</p>
-						<p>回复列表</p>
+						<{foreach from=$newback item=v key=k}>
+						<a href="article-articleList-<{$v.id}>.html">
+							<p>
+								<{$v.title}>
+							</p>
+						</a>
+						<{/foreach}>
 					</blockquote>
 				</div>
 			</div>

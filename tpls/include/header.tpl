@@ -7,6 +7,17 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
     <link rel="stylesheet" href="public/css/style.css">
+    <!--google-analytics-->
+    <script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-75598329-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
    	<script type="text/javascript" src="public/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>   
 <link rel="stylesheet" href="public/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
 	<script>   
@@ -31,9 +42,12 @@
 			<div class="col-md-offset-1 col-md-10">
 				<a class="navbar-brand" href="#">刘雪峰</a>
 				<ul class="nav navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="/">首页</a>
+					</li>
 					<{foreach from=$nav item=v key=k}>
 					<li class="nav-item">
-						<a class="nav-link" href="<{$v.id}>"><{$v.title}></a>
+						<a class="nav-link" href="<{$v.title|strtolower}>.html"><{$v.title}></a>
 					</li>
 					<{/foreach}>
 				</ul>
