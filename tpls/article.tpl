@@ -29,7 +29,7 @@
 					<{else}>
 						<li class="media reply-empty">
 							<p>还没有人发表评论</p>
-							<hr />
+							<hr/>
 						</li>
 					<{/if}>
 

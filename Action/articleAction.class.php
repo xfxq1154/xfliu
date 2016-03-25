@@ -20,7 +20,6 @@ class articleAction extends Action{
 
 		//获取回复信息
 		$artCallBack = $this->artGetTotalCallBackMessage( $id );
-
 		$this->assign('artCallBack', $artCallBack);
 		$this->assign("artContent", $artContent);
 		$this->display("article.tpl");
