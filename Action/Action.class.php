@@ -38,7 +38,7 @@ class Action extends tplOrg{
 	//获取博客主人个人信息 包括联系方式 建议扔到memcache里面 然后做个更新缓存按钮
 	protected function getBlogMasterMessage() {
 		$nav_master_message = new mysqlModel("master_message");
-		$field = array("name", "start_work_time", "age", "work_name", "telephone_num", "qq_num", "weibo", "now_company_name");
+		$field = array("name", "start_work_time", "age", "work_name", "telephone_num", "qq_num", "weibo", "now_company_name", "blog_title", "blog_description", "blog_keywords");
 		return $nav_master_message->select($field);
 	}
 
