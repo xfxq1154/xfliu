@@ -6,21 +6,26 @@
 class Action extends tplOrg{
 
 	protected $mem;
+	protected $userCookiePoint;
 
     function __construct()
     {
+    	$this->userCookiePoint = "userCookiePoint";
     	//主页个人信息 可能其他页面也都能用到
     			//获取首页导航
     	$masterMessage = $this->masterMessageFormat( $this->getBlogMasterMessage() ); 
 		$nav = $this->getNav();
+
 		$this->assign("nav", $nav);
 		$this->assign("masterMessage", $masterMessage[0]);
 
 		//client memcache
-		$mem = new Memcache;
-		$mem->connect(MEM_HOST, MEM_PORT);
-
+		$this->mem = new Memcache;
+		$this->mem->connect(MEM_HOST, MEM_PORT);
+	
+		//print_r($this->mem->getServerStatus(MEM_HOST, MEM_PORT));
         parent::__construct();
+
     }   
 
 
@@ -57,6 +62,15 @@ class Action extends tplOrg{
 
 	protected function _real_escape_string( $str ) {
 		return mysql_real_escape_string( $str );
+	}
+
+	//查看当前文章的浏览量
+	protected function getThisArticlesCookiesCount( $id ) {
+		$cookieCount = $this->mem->get($this->userCookiePoint."-".$id);
+		if( intval( $cookieCount ) <= 0 ) {
+			$cookieCount = 0;
+		}
+		return $cookieCount;
 	}
 }
 ?>

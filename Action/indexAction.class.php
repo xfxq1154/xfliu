@@ -4,6 +4,7 @@ class indexAction extends Action{
 	function __construct() {
 		
 		parent::__construct();
+
 	}
 
 	public function index() {
@@ -19,7 +20,6 @@ class indexAction extends Action{
 	}
 
 
-
 	//获取技术文章列表
 	protected function getBlogArticleList() {
 		$article = new mysqlModel('article');
@@ -28,8 +28,20 @@ class indexAction extends Action{
 		$order = " sort DESC, id DESC";
 		//$limit = "";
 		$result = $article->select($field, $where, $order);
+		//获取的数据建议存入缓存
+		$result = $this->addSomeFunction_ArticleList($result);
 		return $result;
 	} 
+
+	//更新数据格式 增加一些功能参数
+	private function addSomeFunction_ArticleList($result) {
+		$count = count($result);
+		for( $i = 0 ; $i < $count ; $i++ ){
+			//增加浏览总量
+			$result[$i]['cookies'] = $this->getThisArticlesCookiesCount($result[$i]['id']);
+		}
+		return $result;
+	}
 
 	//先实现 再修改
 	//热评
@@ -86,6 +98,7 @@ class indexAction extends Action{
 					a.id 
 				DESC"; 
 		$result = $mysql->query($sql);
+		
 		return $result;
 	}
 
@@ -94,6 +107,7 @@ class indexAction extends Action{
 	private function getLastWeekTime() {
 		return date('Y-m-d', strtotime('-1 week'));
 	}
+
 
 }
 

@@ -22,13 +22,13 @@
 						</a>
 					</span>
 					<span>
-						浏览次数(1111)	
+						浏览次数(<{$v.cookies}>)
 					</span>
 					<span>
-						评论(1111)
+						评论(0)
 					</span>
 					<span>
-						PYTHON	
+						PYTHON
 					</span>
 				</div>
 			</div>

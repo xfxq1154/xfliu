@@ -5,7 +5,7 @@
 				<h1 class="media-heading"><{$artContent.title}></h1>
 				<div class="row">
 					<div class="col-md-6">
-						<p>浏览次数:<span></span></p>
+						<p>浏览次数:<span><{$artCount}></span></p>
 					</div>
 					<div class="col-md-6" style="text-align:right">
 						<p>发布时间:<{$artContent.time|date_format:'%Y-%m-%d %H:%M:%S'}></p>
