@@ -23,7 +23,6 @@ class Action extends tplOrg{
 		$this->mem = new Memcache;
 		$this->mem->connect(MEM_HOST, MEM_PORT);
 	
-		//print_r($this->mem->getServerStatus(MEM_HOST, MEM_PORT));
         parent::__construct();
 
     }   

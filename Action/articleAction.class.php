@@ -12,6 +12,7 @@ class articleAction extends Action{
 			header('status: 404 Not Found');
 			exit(); 
 		}
+
 		parent::__construct();
 		//监控memcached 
 		//$stats = $this->mem->getExtendedStats();
@@ -149,6 +150,7 @@ class articleAction extends Action{
 		$article_cookies = new mysqlModel("article_cookies");
 		$data["art_id"] = $id;
 		$data['time'] = time();
+		$data['user_ip'] = $this->getUserIp();
 		$article_cookies->add($data);
 	}
 
