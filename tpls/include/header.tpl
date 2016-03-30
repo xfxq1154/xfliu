@@ -14,22 +14,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
     <link rel="stylesheet" href="public/css/style.css">
-    <!--google-analytics-->
-    <script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-	  ga('create', 'UA-75598329-1', 'auto');
-	  ga('send', 'pageview');
-
-	</script>
-   	<script type="text/javascript" src="public/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>   
-<link rel="stylesheet" href="public/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
-	<script>   
-		SyntaxHighlighter.all() //执行代码高亮   
-	</script>
+   	<script type="text/javascript" src="public/ueditor/third-party/SyntaxHighlighter/shCore.js"></script> 
+	<link rel="stylesheet" href="public/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
 </head>
 <style type="text/css">
 	body{

@@ -1,5 +1,12 @@
 <?php 
-class adminIndexAction extends Action{
+
+
+/*
+	@author 刘雪峰 (Xuefeng Liu) 
+	@E-mail 273063623@qq.com
+*/
+
+class adminAction extends Action{
 
 	function __construct(){
 		parent::__construct();
@@ -10,14 +17,21 @@ class adminIndexAction extends Action{
 		$this->display("admin.tpl");
 	}
 
-	//文本提交
-	public function getTechnicalArticles() {
+
+	/*
+		提交一个博客
+		@params int art_id
+		@return varchar
+	*/
+	public function submitBlog() {
+
 		$data['title'] = $this->_real_escape_string( $_POST['title'] );
 		$data['content'] = $this->_real_escape_string( $_POST['content'] );
 		$data['time'] = time();
 
 		$article = new mysqlModel("article");
 		$result = $article->add($data);
+		
 		//判断之后再说 最好做个跳转 直接跳转到发布页
 		if ( $result ) {
 			echo "ok";

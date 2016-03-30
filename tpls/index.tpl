@@ -25,7 +25,7 @@
 						浏览次数(<{$v.cookies}>)
 					</span>
 					<span>
-						评论(0)
+						评论(<{$v.comments}>)
 					</span>
 					<span>
 						PYTHON
