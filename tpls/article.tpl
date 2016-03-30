@@ -42,6 +42,7 @@
 					</div>
 				</ul>	
 			</div>
+			<input type="hidden" class="art_id" value="<{$artContent.id}>">
 		</div>
 		<!--评论系统-->
 	</div>
