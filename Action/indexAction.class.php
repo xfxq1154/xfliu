@@ -1,4 +1,11 @@
 <?php 
+
+
+/*
+	@author 刘雪峰 (Xuefeng Liu) 
+	@E-mail 273063623@qq.com
+*/
+
 class indexAction extends Action{
 
 	function __construct() {
@@ -9,8 +16,11 @@ class indexAction extends Action{
 
 	public function index() {
 
+		//博客列表
 		$articleList = $this->getBlogArticleList();
+		//最新回复
 		$newCallBack = $this->getNewCallBack();
+		//最热帖子
 		$hotArticle = $this->getHotArticleList();
 
 		$this->assign("hot", $hotArticle);
@@ -20,7 +30,11 @@ class indexAction extends Action{
 	}
 
 
-	//获取技术文章列表
+	/*
+		获取技术文章列表
+		@return array
+		@TODO 缺少分页
+	*/
 	protected function getBlogArticleList() {
 		$article = new mysqlModel('article');
 		$field = array("id", "title", "content");
@@ -29,22 +43,34 @@ class indexAction extends Action{
 		//$limit = "";
 		$result = $article->select($field, $where, $order);
 		//获取的数据建议存入缓存
-		$result = $this->addSomeFunction_ArticleList($result);
+		$result = $this->insertCacheMessage($result);
 		return $result;
 	} 
 
-	//更新数据格式 增加一些功能参数
-	private function addSomeFunction_ArticleList($result) {
+
+	/*
+		增加缓存信息
+		@params array result
+		@return array
+	*/
+	private function insertCacheMessage($result) {
+		//先判断缓存数据是否存在
 		$count = count($result);
 		for( $i = 0 ; $i < $count ; $i++ ){
 			//增加浏览总量
-			$result[$i]['cookies'] = $this->getThisArticlesCookiesCount($result[$i]['id']);
+			$result[$i]['cookies'] = $this->getCacheCount($this->userCookiePoint, $result[$i]['id']);
+			//增加评论总量
+			$result[$i]['comments'] = $this->getCacheCount($this->commentPoint, $result[$i]['id']);
 		}
 		return $result;
 	}
 
-	//先实现 再修改
-	//热评
+
+	/*
+		最热帖子
+		@return array
+		@TODO 添加缓存
+	*/
 	protected function getHotArticleList() {
 		$lastWeekTime = $this->getLastWeekTime();
 		//查询出
@@ -74,7 +100,12 @@ class indexAction extends Action{
 		return $result;
 	}
 
-	//最新回复 不应该只回复帖子title 还要返回用户说的话
+
+	/*
+		最新回复
+		@return array
+		@TODO 添加缓存
+	*/
 	protected function getNewCallBack() {
 		$lastWeekTime = $this->getLastWeekTime();
 		$mysql = new mysqlModel();
@@ -103,7 +134,10 @@ class indexAction extends Action{
 	}
 
 
-	//获得上个星期到
+	/*
+		获取上个星期的时间
+		@return varchar
+	*/
 	private function getLastWeekTime() {
 		return date('Y-m-d', strtotime('-1 week'));
 	}

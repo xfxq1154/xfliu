@@ -1,4 +1,12 @@
 <?php 
+
+
+/*
+	@author 刘雪峰 (Xuefeng Liu) 
+	@E-mail 273063623@qq.com
+*/
+
+	
 class adminListAction extends Action{
 	
 	function __construct() {
