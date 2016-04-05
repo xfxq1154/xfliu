@@ -28,15 +28,11 @@ class Action extends tplOrg{
 		//client memcache
 		$this->mem = new Memcache;
 		$this->mem->connect(MEM_HOST, MEM_PORT);
-<<<<<<< HEAD
-	
-		print_r($this->mem->getServerStatus(MEM_HOST, MEM_PORT));
-=======
+
 
 		//加载缓存数据
 		$this->autoCache();
-
->>>>>>> 30c6d3bd55bf63ac7ea406220a4951cb4a9c2835
+		
         parent::__construct();
 
     }   
