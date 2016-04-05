@@ -38,6 +38,15 @@ class adminAction extends Action{
 		}
 	}
 
+	/*
+		增加一个清空缓存的方法
+		@return void
+	*/
+	public function memFlush() {
+		$this->mem->flush();
+		print_r("ok");
+	}
+
 }
  
  ?>

@@ -40,8 +40,10 @@
 				<div class="card-header">联系方式</div>
 				<div class="card-block">
 				    <blockquote class="card-blockquote">
-				      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-				      <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+				      <p>邮箱: <{$masterMessage.email}></p>
+				      <footer>
+				      	QQ: <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=<{$masterMessage.email}>&site=qq&menu=yes"><{$masterMessage.qq_num}></a>
+				      </footer>
 				    </blockquote>
 			  	</div>
 			</div>

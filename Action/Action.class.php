@@ -59,7 +59,7 @@ class Action extends tplOrg{
 	*/
 	protected function getBlogMasterMessage() {
 		$nav_master_message = new mysqlModel("master_message");
-		$field = array("name", "start_work_time", "age", "work_name", "telephone_num", "qq_num", "weibo", "now_company_name", "blog_title", "blog_description", "blog_keywords");
+		$field = array("email", "name", "start_work_time", "age", "work_name", "telephone_num", "qq_num", "weibo", "now_company_name", "blog_title", "blog_description", "blog_keywords");
 		return $nav_master_message->select($field);
 	}
 
