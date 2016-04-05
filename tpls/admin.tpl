@@ -2,7 +2,7 @@
 	<div class="col-md-9">
 		<!--后台写入系统-->
 		<div class="media">
-			<form action="adminIndex-submitBlog.html" method="POST">
+			<form action="admin-submitBlog.html" method="POST">
 				<fieldset class="form-group">
 					<label for="exampleInputEmail1">标题</label>
 					<input type="text" name="title" class="form-control">
