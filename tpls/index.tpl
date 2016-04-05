@@ -7,7 +7,7 @@
 				<div class="media-left">
 					<img class="media-object" src="public/image/myface.jpg" style="height:40px;">
 				</div>
-				<div class="media-body">
+				<div class="media-body next-line">
 					<a href="article-articleList-<{$v.id}>.html">
 						<h4 class="media-heading"><{$v.title}></h4>
 					</a>

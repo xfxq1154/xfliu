@@ -1,7 +1,7 @@
 <{include file="include/header.tpl"}>
 	<div class="col-md-9">
 		<div class="media content-border">
-			<div class="media-body">
+			<div class="media-body next-line">
 				<h1 class="media-heading"><{$artContent.title}></h1>
 				<div class="row">
 					<div class="col-md-6">
@@ -10,8 +10,12 @@
 					<div class="col-md-6" style="text-align:right">
 						<p>发布时间:<{$artContent.time|date_format:'%Y-%m-%d %H:%M:%S'}></p>
 					</div>
+				</div>	
+				<div class=row>
+					<div class="col-md-12">
+						<{$artContent.content}>
+					</div>
 				</div>
-				<{$artContent.content}>
 				<hr />
 				<p>发表评论:</p>
 				<ul class="media-list m-b">

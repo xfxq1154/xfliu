@@ -45,3 +45,6 @@
 	padding:0px 5px;
 	border-right:1px solid #d3e0e9;
 }
+.next-line{
+	word-break:break-all;
+}
