@@ -8,16 +8,19 @@
 
 class indexAction extends Action{
 
-	function __construct() {
-		
-		parent::__construct();
+	protected $type;
 
+	function __construct() {
+		parent::__construct();
+		if( isset( $_GET['nav_id'] ) ) {
+			$this->type = $this->mem->get($this->navCacheKey."-".$_GET['nav_id']);
+		}
 	}
 
 	public function index() {
-
+		
 		//博客列表
-		$articleList = $this->getBlogArticleList();
+		$articleList = $this->getBlogArticleList( $this->type );
 		//最新回复
 		$newCallBack = $this->getNewCallBack();
 		//最热帖子
@@ -35,15 +38,22 @@ class indexAction extends Action{
 		@return array
 		@TODO 缺少分页
 	*/
-	protected function getBlogArticleList() {
+	protected function getBlogArticleList( $type = NULL ) {
+		$typeWhere = "";
+		if( $type ) {
+			$typeWhere = " AND type = {$type}";
+		}
+
 		$article = new mysqlModel('article');
-		$field = array("id", "title", "content");
-		$where = " status = 1";
+		$field = array("id", "title", "content", "type");
+		$where = " status = 1 ".$typeWhere;
 		$order = " sort DESC, id DESC";
-		//$limit = "";
+		
 		$result = $article->select($field, $where, $order);
 		//获取的数据建议存入缓存
-		$result = $this->insertCacheMessage($result);
+		if( $result ) {
+			$result = $this->insertCacheMessage($result);
+		}
 		return $result;
 	} 
 
@@ -89,13 +99,14 @@ class indexAction extends Action{
 					WHERE
 					  `time` > $lastWeekTime
 					GROUP BY article_reply_id 
-					ORDER BY article_count DESC 
-					LIMIT 0, 5 ) AS r
+					) AS r
 				ON 
 					a.id = article_reply_id
+				AND
+					a.status = 1
 				ORDER BY 
 					article_count
-				DESC";
+				DESC LIMIT 0, 5 ";
 		$result = $mysql->query($sql);
 		return $result;
 	}
@@ -112,24 +123,19 @@ class indexAction extends Action{
 		//还需要返回评论内容啊啊啊啊
 		$sql ="SELECT 
 					a.id, 
-					a.title 
+					a.title,
+					b.content
 				FROM 
-					blog_article AS a 
-				INNER JOIN 
-					( SELECT 
-						article_reply_id 
-					FROM 
-						blog_article_reply 
-					ORDER BY 
-						`time` 
-					DESC LIMIT 5) AS r 
-				ON 
-					a.id = article_reply_id 
+					blog_article AS a,
+					blog_article_reply AS b
+				WHERE
+					a.id = b.article_reply_id
+				AND
+					a.status = 1
 				ORDER BY 
-					a.id 
-				DESC"; 
+					b.time 
+				DESC LIMIT 0, 5"; 
 		$result = $mysql->query($sql);
-		
 		return $result;
 	}
 
