@@ -36,7 +36,7 @@ class articleAction extends Action{
 		//获取内容
 		$artContent = $this->getArtContent( $this->art_id );
 		//获取浏览量
-		$artCount = $this->getCacheCount( $this->userCookiePoint, $this->art_id );
+		$artCount = $this->getCookiesCount( $this->userCookiePoint, $this->art_id );
 		//获取回复信息
 		$artCallBack = $this->artGetTotalCallBackMessage( $this->art_id );
 
@@ -46,7 +46,22 @@ class articleAction extends Action{
 		$this->display("article.tpl");
 	} 
 
-
+	/*
+		获取浏览量
+		@params int art_id
+		@params varchar userCookiePoint
+		@return int
+	*/
+	private function getCookiesCount($cookiesPoint, $art_id) {
+		$cookiesCount = $this->getCacheCount( $cookiesPoint, $art_id );
+		if( $cookiesCount == 0 ) {
+			//如果浏览量为零 曾默认增加一个浏览记录 因为increment 不会自动创建元素
+			$this->mem->add($this->createKeyName( $cookiesPoint, $art_id ), 1);
+			$cookiesCount = 1;
+		}
+		return $cookiesCount;
+	}
+	
 	/*
 		获取博客内容
 		@params int art_id

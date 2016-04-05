@@ -29,7 +29,6 @@ class Action extends tplOrg{
 		$this->mem = new Memcache;
 		$this->mem->connect(MEM_HOST, MEM_PORT);
 
-
 		//加载缓存数据
 		$this->autoCache();
 		
