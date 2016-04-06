@@ -40,7 +40,7 @@
 					</li>
 					<{foreach from=$nav item=v key=k}>
 					<li class="nav-item">
-						<a class="nav-link" href="<{$v.title|strtolower}>.html"><{$v.title}></a>
+						<a class="nav-link" href="<{$v.title}>.html"><{$v.title}></a>
 					</li>
 					<{/foreach}>
 				</ul>
@@ -56,7 +56,7 @@
 				<div></div>
 				<div style="height:300px;">
 					<a href="#">
-						<img src="public/image/myface.jpg" class="img-circle index_avatar"></a>
+						<img src="http://q1.qlogo.cn/g?b=qq&nk=<{$masterMessage.email}>&s=100" class="img-circle index_avatar" />
 					<h5>
 						<a href="#"><{$masterMessage.name}></a>
 					</h5>

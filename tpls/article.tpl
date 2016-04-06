@@ -13,7 +13,7 @@
 				</div>	
 				<div class=row>
 					<div class="col-md-12">
-						<{$artContent.content}>
+						<{$artContent.content|default:"该文章不存在"}>
 					</div>
 				</div>
 				<hr />

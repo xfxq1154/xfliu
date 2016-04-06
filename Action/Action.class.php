@@ -11,10 +11,11 @@ class Action extends tplOrg{
 	protected $userCookiePoint;
 	protected $commentPoint; 
 	protected $cacheSyncKey;
+	protected $navCacheKey;
 
     function __construct()
     {
-
+    	$this->navCacheKey     = "navCacheKey";
     	$this->cacheSyncKey    = "cacheSyncKey";
     	$this->userCookiePoint = "userCookiePoint";
     	$this->commentPoint    = "commentPoint";
@@ -28,10 +29,8 @@ class Action extends tplOrg{
 		//client memcache
 		$this->mem = new Memcache;
 		$this->mem->connect(MEM_HOST, MEM_PORT);
-
 		//加载缓存数据
 		$this->autoCache();
-		
         parent::__construct();
 
     }   
@@ -109,7 +108,9 @@ class Action extends tplOrg{
     		$this->mem->add($this->cacheSyncKey, 1, false, 0);
     		$this->insertCookiesCache(); //浏览记录插入缓存
     		$this->insertCommentCache(); //评论记录插入缓存
-    	} 
+    		$this->insertNavCache();     //导航缓存插入
+    	}
+    	$this->insertNavCache();     //导航缓存插入
     }
 
 
@@ -157,6 +158,13 @@ class Action extends tplOrg{
 		} 
 	}	
 
+	private function insertNavCache() {
+		$result = $this->getNav();
+		$count = count($result);
+		for( $i = 0 ; $i < $count ; $i++ ) {
+			$this->mem->set($this->navCacheKey."-".$result[$i]['title'], $result[$i]['id']); 
+		}
+	}
 
 	/*
 		生成cache的缓存key
@@ -168,19 +176,21 @@ class Action extends tplOrg{
 		return $keyName."-".$art_id;
 	}
 
-
 	/*
-		查看当前文章的浏览量
-		@params keyName 缓存键名
-		@params art_id 帖子ID
+		查看当前文章的各项缓存量
+		@params varchar keyName 缓存键名
+		@params int     art_id 帖子ID
+		@params int     num 默认显示数量
 		@return varchar 
 	*/
-	protected function getCacheCount( $keyName, $art_id ) {
-		$cookieCount = $this->mem->get($this->createKeyName( $keyName, $art_id) );
-		if( intval( $cookieCount ) <= 0 ) {
-			$cookieCount = 0;
+	protected function getCacheCount( $keyName, $art_id , $num = 0) {
+		$count = $this->mem->get($this->createKeyName( $keyName, $art_id) );
+		if( $count == 0 ) {
+			//如果浏览量为零 曾默认增加一个浏览记录 因为increment 不会自动创建元素
+			$this->mem->add($this->createKeyName( $keyName, $art_id ), $num);
+			$count = $num;
 		}
-		return $cookieCount;
+		return $count;
 	}
 
 
