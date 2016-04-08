@@ -12,6 +12,7 @@ class Action extends tplOrg{
 	protected $commentPoint; 
 	protected $cacheSyncKey;
 	protected $navCacheKey;
+	protected $badwordKey;
 
     function __construct()
     {
@@ -19,6 +20,7 @@ class Action extends tplOrg{
     	$this->cacheSyncKey    = "cacheSyncKey";
     	$this->userCookiePoint = "userCookiePoint";
     	$this->commentPoint    = "commentPoint";
+ 		$this->badwordKey      = "badword";
 
 		//导航
     	$masterMessage = $this->masterMessageFormat( $this->getBlogMasterMessage() ); 
@@ -31,6 +33,8 @@ class Action extends tplOrg{
 		$this->mem->connect(MEM_HOST, MEM_PORT);
 		//加载缓存数据
 		$this->autoCache();
+		$this->cacheBadWord();
+		
         parent::__construct();
 
     }   
@@ -109,10 +113,9 @@ class Action extends tplOrg{
     		$this->insertCookiesCache(); //浏览记录插入缓存
     		$this->insertCommentCache(); //评论记录插入缓存
     		$this->insertNavCache();     //导航缓存插入
+    		$this->cacheBadWord();       //关键词缓存
     	}
-    	$this->insertNavCache();     //导航缓存插入
     }
-
 
     /*
 		插入用户浏览数据到缓存
@@ -191,6 +194,15 @@ class Action extends tplOrg{
 			$count = $num;
 		}
 		return $count;
+	}
+
+	/*
+		缓存屏蔽词
+	*/
+	private function cacheBadWord() {
+		$badword = new badwordOrg();
+		$badword_array = array_combine($badword->badword(),array_fill(0,count($badword->badword()),'*'));
+		$this->mem->set($this->badwordKey, $badword_array);
 	}
 
 

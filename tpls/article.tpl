@@ -24,7 +24,7 @@
 						<li class="media">
 							<a class="media-left" href="#">
 								<img class="media-object img-circle" src="http://7xs3gv.com1.z0.glb.clouddn.com/default_face.jpg" style="height:40px;"></a>
-							<div class="media-body"> <strong><{$v.user_ip}></strong>
+							<div class="media-body"> <strong><{$v.user_ip|filterip}></strong>
 								<{$v.content}>
 							</div>
 							<hr />

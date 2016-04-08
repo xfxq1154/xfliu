@@ -23,8 +23,9 @@ class articleAction extends Action{
 		}
   
 		$this->cookiesKey = $this->createCookiesKey($this->art_id);
-
+		
 		parent::__construct();
+
 	}
 
 
@@ -157,7 +158,8 @@ class articleAction extends Action{
 			$data['user_ip'] = $this->getUserIp();
 		}
 
-		$data['content'] = $this->_real_escape_string($_POST['content']);
+		$data['content'] = $this->verBadWord( $this->_real_escape_string($_POST['content']) );
+
 		$data['article_reply_id'] = $_GET['art_id'];
 		$data['time'] = time();
 
@@ -189,6 +191,16 @@ class articleAction extends Action{
 			$this->mem->decrement( $this->createKeyName($keyName, $art_id), $num);
 		}
 	}
+
+	/*
+		关键词屏蔽
+		@params text content 评论内容 
+	*/
+	private function verBadWord( $content ) {
+		$badword = $this->mem->get($this->badwordKey);
+		return strtr( $content, $badword);
+	}
+
 
 }
 
