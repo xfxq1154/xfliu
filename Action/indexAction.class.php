@@ -9,8 +9,12 @@
 class indexAction extends Action{
 
 	protected $type;
+	protected $artPage;
 
 	function __construct() {
+
+		$this->artPage = ARTICLE_LIST_PAGE; //分页
+
 		parent::__construct();
 		if( isset( $_GET['nav_id'] ) ) {
 			$this->type = $this->mem->get($this->navCacheKey."-".$_GET['nav_id']);
@@ -18,7 +22,7 @@ class indexAction extends Action{
 	}
 
 	public function index() {
-		
+		$page = new pageModel();
 		//博客列表
 		$articleList = $this->getBlogArticleList( $this->type );
 		//最新回复
@@ -32,11 +36,19 @@ class indexAction extends Action{
 		$this->display('index.tpl');
 	}
 
-
 	/*
 		获取技术文章列表
 		@return array
-		@TODO 缺少分页
+	*/
+	protected function getBlogArticleListPage() {
+		//先获取页数
+
+	}
+
+
+	/*
+		从数据库中获取缓存的技术列表
+		@return array
 	*/
 	protected function getBlogArticleList( $type = NULL ) {
 		$typeWhere = "";
@@ -47,7 +59,7 @@ class indexAction extends Action{
 		$article = new mysqlModel('article');
 		$field = array("id", "title", "content", "type");
 		$where = " status = 1 ".$typeWhere;
-		$order = " sort DESC, id DESC";
+		$order = " sort DESC, time DESC";
 		
 		$result = $article->select($field, $where, $order);
 		//获取的数据建议存入缓存
